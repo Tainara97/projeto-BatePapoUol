@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto&display=swap" rel="stylesheet">
+    <title>Bate Papo UOL</title>
+</head>
+
+<body>
+
+    <header class="topo">
+        <img src="imagens/62f625d9852515569aa51967d5654788.png" class="logo" />
+        <ion-icon name="people-outline" onclick="acessarMenu()"></ion-icon>
+    </header>
+
+    <ul class="chat"></ul>
+
+    <div class="fundo-escuro escondido" onclick="retornarBatePapo()"></div>
+
+    <nav class="menu-lateral escondido">
+        <div class="tipo-contato">
+            <h1>Escolha um contato para enviar mensagem:</h1>
+            <div class="contato-todos selecionado" onclick="selecionarContato(this)">
+                <ion-icon name="people"></ion-icon>
+                <p class="descrição-contato">Todos</p>
+                <ion-icon name="checkmark" class="check"></ion-icon>
+            </div>
+
+            <ul class="contato-único">
+            </ul>
+        </div>
+
+        <div class="tipo-visibilidade">
+            <h2>Escolha a visibilidade:</h2>
+            <div class="público selecionado" onclick="selecionarVisibilidade(this)">
+                <ion-icon name="lock-open"></ion-icon>
+                <p class="descrição-visibilidade">Público</p>
+                <ion-icon name="checkmark" class="check"></ion-icon>
+            </div>
+            <div class="reservadamente" onclick="selecionarVisibilidade(this)">
+                <ion-icon name="lock-closed"></ion-icon>
+                <p class="descrição-visibilidade">Reservadamente</p>
+                <ion-icon name="checkmark" class="check"></ion-icon>
+            </div>
+        </div>
+
+    </nav>
+    <footer class="rodapé">
+        <div class="caixa-mensagem">
+            <input type="text" class="mensagem" placeholder="Escreva aqui...">
+            <div class="informações-mensagem">Enviando para Todos (Público)</div>
+        </div>
+        <div class="ícone-enviar" onclick="enviarMensagem()">
+            <ion-icon name="paper-plane-outline"></ion-icon>
+        </div>
+
+
+    </footer>
+    </div>
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="uol.js"></script>
+</body>
+
+</html>
