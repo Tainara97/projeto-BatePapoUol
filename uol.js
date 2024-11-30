@@ -1,4 +1,4 @@
-const UUID = "5a263ee0-88d9-462d-87bf-d1536c4b7173";
+const UUID = "3d0a6d3f-8184-4560-bb28-aa0afd571d28";
 let integrantes = [];
 let nomeIntegrante = "";
 let mensagens = "";
@@ -73,6 +73,7 @@ function adicionarNovoIntegrante() {
 }
 
 function iniciarChat() {
+    console.log("Integrante adicionado com sucesso");
     buscarMensagens();
     buscarIntegrantes();
     
@@ -96,6 +97,7 @@ function buscarIntegrantes(resposta) {
 }
 
 function processarListaRecebida(resposta) {
+    console.log("Lista processada com sucesso");
     integrantes = resposta.data;
     renderizarIntegrantes();
 }
@@ -116,12 +118,21 @@ function renderizarIntegrantes() {
 }
 
 function manterConexão() {
-    const promessa = axios.post("https://mock-api.driven.com.br/api/v6/uol/status/" + UUID, { name: nomeIntegrante });
+    const url = ("https://mock-api.driven.com.br/api/v6/uol/status/" + UUID);
+    const dadosRequisição = {
+        name: nomeIntegrante
+    };
 
+    const promessa = axios.post(url, dadosRequisição);
+
+    promessa.then(resposta => {
+        console.log("Status atualizado com sucesso")
+    });
     promessa.catch(mostrarErro);
 }
 
 function renderizarMensagens(resposta) {
+    console.log("Mensagens renderizadas com sucesso!");
     mensagens = resposta.data;
 
     mensagens.sort((a, b) => new Date(a.horario) - new Date(b.horario));
@@ -131,7 +142,9 @@ function renderizarMensagens(resposta) {
 
     mensagens.forEach(mensagem => {
         if (selecionarMensagensPrivadas(mensagem)) {
-            estruturarMensagensPrivadas(mensagem);
+            if (mensagem.to === nomeIntegrante || mensagem.from === nomeIntegrante){
+                estruturarMensagensPrivadas(mensagem);
+            }        
         }else if(selecionarMensagensPublicas(mensagem)) {
             estruturarMensagensPublicas(mensagem);
         }else if (selecionarMensagensStatus(mensagem)) {
